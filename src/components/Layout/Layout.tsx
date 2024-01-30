@@ -21,7 +21,7 @@ const Layout = ({ children }: LayoutProps) => {
     <>
       {/* <Navbar /> */}
       <MainContainer>{children}</MainContainer>
-      <Loader loading={false} />
+      <Loader />
       {/* <InstallModal /> */}
     </>
   );
