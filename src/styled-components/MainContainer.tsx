@@ -8,6 +8,6 @@ export const MainContainer = Styled.main`
   align-items: center;
   @media (min-width: 768px){
     padding-bottom: 4rem;
-    background-color: var(--primary-color-light);
+    background-color: var(--primary-color);
   }
 `;

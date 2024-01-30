@@ -2,7 +2,7 @@ import Styled from "styled-components";
 
 const Container = Styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -59,8 +59,8 @@ const Answers = Styled.div`
 
     &:hover{
       cursor: pointer;
-      background-color: #DFF1FF;
-      color: #282c34;
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
     }
   }
 `;

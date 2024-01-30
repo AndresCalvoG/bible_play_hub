@@ -2,11 +2,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 
 :root {
-  --primary-color: #00529c;
+  --primary-color: #282c34;
   --primary-color-light: #e4f0ff;
-  --secondary-color: #ffffff;
+  --secondary-color: #dff1ff;
   --gray: #d8d8d8;
   --error: #ffa500;
+  --text: #ffffff;
 }
 * {
   margin: 0;
@@ -24,8 +25,14 @@ img {
 }
 body {
   width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #282c34;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--text);
+  overflow-x: hidden;
+}
+body > #root {
+  width: 100%;
+  height: 100%;
 }
