@@ -31,4 +31,4 @@ async function init(): Promise<boolean> {
 }
 init();
 
-export { auth, storage, db, messaging };
+export { auth, storage, db, messaging, init };

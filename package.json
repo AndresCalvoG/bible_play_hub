@@ -30,7 +30,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "firebase deploy --only hosting"
+    "deploy": "firebase deploy --only hosting",
+    "tsc:w": "tsc -w",
+    "lint": "eslint src",
+    "lint:fix": "eslint src/** --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -50,7 +53,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://bibleplayhub.web.app/",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/jest-dom": "^5.17.0",
@@ -65,5 +67,6 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2"
-  }
+  },
+  "homepage": "https://bibleplayhub.web.app/"
 }
