@@ -9,11 +9,12 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       {/* <Navbar /> */}
-      <MainContainer>{children}</MainContainer>
+      {/* <MainContainer>{children}</MainContainer> */}
+      {children}
       <Loader />
       {/* <InstallModal /> */}
     </>
   );
 };
 
-export default Layout;
+export { Layout };
