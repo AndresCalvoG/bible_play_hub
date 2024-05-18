@@ -7,11 +7,12 @@
 
 :root {
   --primary-color: #ffffff;
-  --primary-color-light: #e4f0ff;
-  --secondary-color: #dff1ff;
-  --gray: #d8d8d8;
-  --error: #ffa500;
-  --text: #ffffff;
+  --primary-color-light: #f3dff4;
+  --secondary-color: #4f46e4;
+  --yellow: #ffe176;
+  --red: #fe646f;
+  --green: #9be69d;
+  --purple: #cb97e7;
 }
 * {
   margin: 0;

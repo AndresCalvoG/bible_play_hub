@@ -1,9 +1,11 @@
-import { Hero } from "../../components/Hero/Hero";
+import { Hero } from "./Hero/Hero";
+import { Stats } from "./Stats/Stats";
 
 const Landing = () => {
   return (
     <>
       <Hero />
+      <Stats />
     </>
   );
 };
