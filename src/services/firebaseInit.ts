@@ -18,7 +18,7 @@ async function init(): Promise<boolean> {
   }
   try {
     app = initializeApp(firebaseConfig);
-    // auth = getAuth();
+    auth = getAuth();
     // storage = getStorage(app);
     // db = getFirestore(app);
     // messaging = getMessaging(app);
@@ -31,4 +31,4 @@ async function init(): Promise<boolean> {
 }
 init();
 
-export { auth, storage, db, messaging, init };
+export { auth, storage, db, messaging };
