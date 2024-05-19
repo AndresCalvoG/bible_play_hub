@@ -4,12 +4,7 @@ import Logo64 from "../../assets/logo64.png";
 import { Button } from "../../components/Buttons/Button";
 import GoogleIcon from "../../assets/google.png";
 
-const Login = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log("hola", event);
-  };
-
+const SignUp = () => {
   return (
     <>
       <header className="absolute inset-x-0 top-0 z-50">
@@ -19,10 +14,10 @@ const Login = () => {
         >
           <div className=" flex flex-1 justify-start">
             <Link
-              to="/"
+              to="/login"
               className="text-sm font-semibold leading-6 text-gray-900"
             >
-              <span aria-hidden="true">&larr;</span> Regresar a inicio
+              <span aria-hidden="true">&larr;</span> Regresar a iniciar sesión
             </Link>
           </div>
         </nav>
@@ -36,12 +31,27 @@ const Login = () => {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Iniciar Sesión en tu cuenta
+            Registrate
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6" action="#" method="POST">
+            <Input
+              label="Nombres"
+              name="name"
+              type="text"
+              autoComplete="name"
+              required
+            />
+            <Input
+              label="Apellidos"
+              name="lastName"
+              type="text"
+              autoComplete="lastName"
+              required
+            />
+
             <Input
               name="email"
               label="Correo electronico"
@@ -55,36 +65,16 @@ const Login = () => {
               label="Contraseña"
               type="password"
               autoComplete="current-password"
-              link={
-                <div className="text-sm">
-                  <Link
-                    to="/reset-password"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Olvidaste tu contraseña?
-                  </Link>
-                </div>
-              }
               required
             />
 
-            <Button name="Iniciar Sesion" />
+            <Button name="Registrarme" />
             <Button name="Iniciar con Google" icon={GoogleIcon} outlined />
           </form>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
-            No tines una cuenta?{" "}
-            <Link
-              to="/signup"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              Registrate
-            </Link>
-          </p>
         </div>
       </div>
     </>
   );
 };
 
-export default Login;
+export default SignUp;

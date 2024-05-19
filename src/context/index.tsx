@@ -1,5 +1,12 @@
-import { ReactNode, useState, createContext, useContext } from "react";
+import {
+  ReactNode,
+  useState,
+  createContext,
+  useContext,
+  useEffect,
+} from "react";
 import { userMD } from "../models/user.model";
+import { userAuthListener } from "../adapters/user.adapter";
 
 interface props {
   children: ReactNode;
@@ -17,6 +24,11 @@ const AppProvider = ({ children }: props) => {
   //ESTADOS
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<userMD>({} as userMD);
+
+  useEffect(() => {
+    const unsuscribe = userAuthListener(setUser);
+    return () => unsuscribe();
+  }, []);
 
   return (
     <AppContext.Provider

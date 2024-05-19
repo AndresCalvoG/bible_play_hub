@@ -8,6 +8,7 @@ import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 // const Home = lazy(() => import("./pages/Home/Home"));
 const Landing = lazy(() => import("./pages/Landing/Landing"));
 const Login = lazy(() => import("./pages/Login/Login"));
+const SignUp = lazy(() => import("./pages/SignUp/SignUp"));
 const Trivia = lazy(() => import("./pages/Trivia/Trivia"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 
@@ -20,6 +21,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
               <Route
                 path="/trivia"
                 element={
