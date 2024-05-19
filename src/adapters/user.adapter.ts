@@ -140,12 +140,17 @@ export const userAuthListener = (
   userUpdater: (user: userMD) => void
 ): Unsubscribe => {
   return authStateListener(async (currentUser: any) => {
-    console.log("currentUser", currentUser);
-    // let user: userMD = {} as userMD;
+    let user: userMD = {
+      id: currentUser?.uid || "",
+      name: currentUser?.displayName || "",
+      email: currentUser?.email || "",
+      photoUrl: currentUser?.photoURL || "",
+      createdAt: currentUser?.metadata?.creationTime || "",
+    };
     // if (currentUser) {
     //   user = await getUserInfoByID(currentUser.uid);
     // }
-    userUpdater(currentUser);
+    userUpdater(user);
   });
 };
 export const getUserAuthJWTToken = async () => {

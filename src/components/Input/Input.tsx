@@ -1,3 +1,5 @@
+import { UseFormRegister } from "react-hook-form";
+
 type InputProps = {
   name: string;
   label: string;
@@ -5,6 +7,7 @@ type InputProps = {
   required?: boolean;
   autoComplete?: string;
   link?: JSX.Element;
+  register?: UseFormRegister<any>;
 };
 const Input = ({
   name,
@@ -13,7 +16,14 @@ const Input = ({
   required,
   link,
   autoComplete,
+  register,
 }: InputProps) => {
+  const registerProps = register
+    ? register(name as string, {
+        required: required,
+      })
+    : {};
+
   return (
     <div>
       <div className={link && "flex items-center justify-between"}>
@@ -32,6 +42,7 @@ const Input = ({
           type={type}
           autoComplete={autoComplete}
           required={required}
+          {...registerProps}
           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
         />
       </div>

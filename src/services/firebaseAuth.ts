@@ -30,10 +30,10 @@ const createNewUserAuth = async (
     const imgDefault = "";
     await updateProfileAuth(userCredential.user, name, lastName, imgDefault);
     var actionCodeSettings = {
-      url: "https://ipucmanager.web.app/#/?email=" + userCredential.user.email,
+      url: "https://bibleplayhub.web.app/#/?email=" + userCredential.user.email,
       handleCodeInApp: true,
     };
-    await sendEmailVerification(userCredential.user, actionCodeSettings);
+    //await sendEmailVerification(userCredential.user, actionCodeSettings);
     return userCredential;
   } catch (error) {
     return error;
