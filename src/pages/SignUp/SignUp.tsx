@@ -7,6 +7,7 @@ import { useAppContext } from "../../context";
 import { useForm } from "react-hook-form";
 import {
   createNewUserAuthentication,
+  loginUserAuthWithGoogle,
   loginUserAuthentication,
   logoutUserAuthentication,
 } from "../../adapters/user.adapter";
@@ -64,6 +65,13 @@ const SignUp = () => {
     setLoading(false);
     navigate("/login");
   });
+
+  const loginWithGoogle = async () => {
+    setLoading(true);
+    await loginUserAuthWithGoogle();
+    setLoading(false);
+    navigate("/trivia");
+  };
 
   return (
     <>
@@ -133,7 +141,12 @@ const SignUp = () => {
             />
 
             <Button name="Registrarme" onClick={signUpUser} />
-            <Button name="Iniciar con Google" icon={GoogleIcon} outlined />
+            <Button
+              name="Iniciar con Google"
+              icon={GoogleIcon}
+              onClick={() => loginWithGoogle()}
+              outlined
+            />
           </form>
         </div>
       </div>

@@ -7,6 +7,7 @@ import {
   passwordResetFromEmail,
   authStateListener,
   getAuthJWTId,
+  siginSignupWithGoogle,
 } from "../services/firebaseAuth";
 // import { getUserTokenFM } from "../services/firebaseMessaging";
 // import {
@@ -117,6 +118,9 @@ export const loginUserAuthentication = async (
 ) => {
   let authCredential: any = await loginUserAuth(email, password);
   return authCredential;
+};
+export const loginUserAuthWithGoogle = async () => {
+  await siginSignupWithGoogle();
 };
 export const createNewUserAuthentication = async (
   email: string,

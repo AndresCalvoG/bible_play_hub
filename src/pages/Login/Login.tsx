@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import {
   loginUserAuthentication,
   logoutUserAuthentication,
+  loginUserAuthWithGoogle,
 } from "../../adapters/user.adapter";
 import { useAppContext } from "../../context";
 
@@ -46,6 +47,13 @@ const Login = () => {
     setLoading(false);
     navigate("/trivia");
   });
+
+  const loginWithGoogle = async () => {
+    setLoading(true);
+    await loginUserAuthWithGoogle();
+    setLoading(false);
+    navigate("/trivia");
+  };
 
   return (
     <>
@@ -108,7 +116,12 @@ const Login = () => {
             />
 
             <Button name="Iniciar Sesion" onClick={logginUser} />
-            <Button name="Iniciar con Google" icon={GoogleIcon} outlined />
+            <Button
+              name="Iniciar con Google"
+              icon={GoogleIcon}
+              onClick={() => loginWithGoogle()}
+              outlined
+            />
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">

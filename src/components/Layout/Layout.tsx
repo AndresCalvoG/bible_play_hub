@@ -1,6 +1,5 @@
 import React from "react";
 import { Loader } from "../Loader/Loader";
-import { MainContainer } from "../../styled-components/MainContainer";
 
 type LayoutProps = {
   children: React.ReactNode;

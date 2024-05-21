@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Logo32 from "../../../assets/logo32.png";
+import AvatarIcon from "../../../assets/user.png";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../../context";
 import { logoutUserAuthentication } from "../../../adapters/user.adapter";
@@ -55,6 +56,13 @@ const Header = () => {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          {user.id && (
+            <img
+              className="inline-block h-8 w-8 rounded-full ring-2 ring-white mr-2"
+              src={user.photoUrl || AvatarIcon}
+              alt=""
+            />
+          )}
           <Link
             to={user.id ? "/" : "/login"}
             className="text-sm font-semibold leading-6 text-gray-900"
@@ -82,7 +90,15 @@ const Header = () => {
           <div className="flex items-center justify-between">
             <Link to="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Bible Play</span>
-              <img className="h-8 w-auto" src={Logo32} alt="logo" />
+              {user.id ? (
+                <img
+                  className="inline-block h-8 w-8 rounded-full ring-2 ring-white mr-2"
+                  src={user.photoUrl || AvatarIcon}
+                  alt=""
+                />
+              ) : (
+                <img className="h-8 w-auto" src={Logo32} alt="logo" />
+              )}
             </Link>
             <button
               type="button"
