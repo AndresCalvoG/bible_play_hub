@@ -10,7 +10,7 @@ const PublicOnlyRoute = ({ children }: props) => {
   const { user } = useAppContext();
 
   if (user.id) {
-    return <Navigate to="/Dashboard" />;
+    return <Navigate to="/" />;
   }
   return children;
 };

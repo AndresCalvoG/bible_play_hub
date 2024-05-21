@@ -1,10 +1,70 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input/Input";
 import Logo64 from "../../assets/logo64.png";
 import { Button } from "../../components/Buttons/Button";
 import GoogleIcon from "../../assets/google.png";
+import { useAppContext } from "../../context";
+import { useForm } from "react-hook-form";
+import {
+  createNewUserAuthentication,
+  loginUserAuthentication,
+  logoutUserAuthentication,
+} from "../../adapters/user.adapter";
+
+type signUpForm = {
+  name: string;
+  lastName: string;
+  email: string;
+  password: string;
+};
 
 const SignUp = () => {
+  const adminEmail = process.env.REACT_APP_FIREBASE_ADMIN_EMAIL;
+  const adminPassword = process.env.REACT_APP_FIREBASE_ADMIN_PASSWORD;
+  const navigate = useNavigate();
+  const { setLoading } = useAppContext();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<signUpForm>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const signUpUser = handleSubmit(async (data) => {
+    setLoading(true);
+    // admin auth
+    let authCredential: any = await loginUserAuthentication(
+      adminEmail ? adminEmail : "",
+      adminPassword ? adminPassword : ""
+    );
+    if (authCredential.code) {
+      setLoading(false);
+      console.log(authCredential);
+      //showError(authCredential.code, setAlertObject);
+      await logoutUserAuthentication();
+      return;
+    }
+    //Create new user Auth
+    const userCredential: any = await createNewUserAuthentication(
+      data.email,
+      data.password,
+      data.name,
+      data.lastName
+    );
+    if (userCredential.code) {
+      setLoading(false);
+      //showError(userCredential.code, setAlertObject);
+      return;
+    }
+    await logoutUserAuthentication();
+    setLoading(false);
+    navigate("/login");
+  });
+
   return (
     <>
       <header className="absolute inset-x-0 top-0 z-50">
@@ -42,6 +102,7 @@ const SignUp = () => {
               name="name"
               type="text"
               autoComplete="name"
+              register={register}
               required
             />
             <Input
@@ -49,6 +110,7 @@ const SignUp = () => {
               name="lastName"
               type="text"
               autoComplete="lastName"
+              register={register}
               required
             />
 
@@ -57,6 +119,7 @@ const SignUp = () => {
               label="Correo electronico"
               type="email"
               autoComplete="email"
+              register={register}
               required
             />
 
@@ -65,10 +128,11 @@ const SignUp = () => {
               label="Contraseña"
               type="password"
               autoComplete="current-password"
+              register={register}
               required
             />
 
-            <Button name="Registrarme" />
+            <Button name="Registrarme" onClick={signUpUser} />
             <Button name="Iniciar con Google" icon={GoogleIcon} outlined />
           </form>
         </div>

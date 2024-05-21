@@ -4,6 +4,7 @@ import { LoaderUI } from "./components/Loader/LoaderUI";
 import { AppProvider } from "./context";
 import { Layout } from "./components/Layout/Layout";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+import { PublicOnlyRoute } from "./components/PublicOnlyRoute/PublicOnlyRoute";
 
 // const Home = lazy(() => import("./pages/Home/Home"));
 const Landing = lazy(() => import("./pages/Landing/Landing"));
@@ -20,8 +21,22 @@ const App = () => {
           <Layout>
             <Routes>
               <Route path="/" element={<Landing />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
+              <Route
+                path="/login"
+                element={
+                  <PublicOnlyRoute>
+                    <Login />
+                  </PublicOnlyRoute>
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <PublicOnlyRoute>
+                    <SignUp />
+                  </PublicOnlyRoute>
+                }
+              />
               <Route
                 path="/trivia"
                 element={

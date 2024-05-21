@@ -1,14 +1,51 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input/Input";
 import Logo64 from "../../assets/logo64.png";
 import { Button } from "../../components/Buttons/Button";
 import GoogleIcon from "../../assets/google.png";
+import { useForm } from "react-hook-form";
+import {
+  loginUserAuthentication,
+  logoutUserAuthentication,
+} from "../../adapters/user.adapter";
+import { useAppContext } from "../../context";
+
+type loginForm = {
+  email: string;
+  password: string;
+};
 
 const Login = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log("hola", event);
-  };
+  const navigate = useNavigate();
+  const { setLoading } = useAppContext();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<loginForm>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const logginUser = handleSubmit(async (data) => {
+    setLoading(true);
+    //login user auth
+    let userCredential: any = await loginUserAuthentication(
+      data.email,
+      data.password
+    );
+    if (userCredential.code) {
+      setLoading(false);
+      //showError(userCredential.code, setAlertObject);
+      console.log(userCredential);
+      await logoutUserAuthentication();
+      return;
+    }
+    setLoading(false);
+    navigate("/trivia");
+  });
 
   return (
     <>
@@ -41,12 +78,13 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6">
             <Input
               name="email"
               label="Correo electronico"
               type="email"
               autoComplete="email"
+              register={register}
               required
             />
 
@@ -55,6 +93,7 @@ const Login = () => {
               label="Contraseña"
               type="password"
               autoComplete="current-password"
+              register={register}
               link={
                 <div className="text-sm">
                   <Link
@@ -68,7 +107,7 @@ const Login = () => {
               required
             />
 
-            <Button name="Iniciar Sesion" />
+            <Button name="Iniciar Sesion" onClick={logginUser} />
             <Button name="Iniciar con Google" icon={GoogleIcon} outlined />
           </form>
 
